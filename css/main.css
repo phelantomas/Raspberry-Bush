@@ -724,6 +724,93 @@ button:focus {
 }
 
 /* ==========================================================================
+  6. Recipe Section Style
+   ========================================================================== */
+#recipe {
+  background: url(../img/recipe.jpg) fixed no-repeat;
+  background-size: cover;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+  font-weight: bold;
+}
+
+#recipe .section-title {
+  color: #fff;
+  font-weight: bold;
+}
+
+#recipe .section-subtitle {
+  color: #fff;
+  font-weight: bold;
+}
+
+#recipe .icon {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+#recipe .box-item {
+  padding: 15px 0;
+}
+
+#recipe .box-item .icon {
+  border: 1px solid #61D2B4;
+  text-align: center;
+  float: left;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+#recipe .box-item .icon i {
+  color: #61D2B4;
+  font-size: 24px;
+  line-height: 60px;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+#recipe .box-item .text {
+  padding-left: 80px;
+}
+
+#recipe .box-item .text h4 {
+  color: #61D2B4;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  line-height: 22px;
+}
+
+#recipe .box-item .text p {
+  font-size: 14px;
+  line-height: 26px;
+}
+
+#recipe .box-item:hover .icon {
+  background: #61D2B4;
+}
+
+#recipe .box-item:hover .icon i {
+  color: #ffffff;
+}
+
+#recipe .show-box img {
+  position: absolute;
+  bottom: -120px;
+  left: 720px;
+}
+
+/* ==========================================================================
   7. Video promo Style
    ========================================================================== */
 .video-promo {
