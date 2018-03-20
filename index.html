@@ -24,7 +24,6 @@
 
   </head>
   <body>
-
     <!-- Header Section Start -->
     <header id="hero-area" data-stellar-background-ratio="0.5">    
       <!-- Navbar Start -->
@@ -46,13 +45,13 @@
                 <a class="nav-link page-scroll" href="#features">Ingredients</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link page-scroll" href="#recipe">Recipe</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link page-scroll" href="#portfolios">Images</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link page-scroll" href="#team">Team</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link page-scroll" href="#contact">Contact</a>
               </li>
             </ul>
           </div>
@@ -66,8 +65,8 @@
             <li>
               <a class="page-scroll" href="#services">Ingredients</a>
             </li>
-            <li>
-              <a class="page-scroll" href="#features">Features</a>
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="#recipe">Recipe</a>
             </li>
             <li>
               <a class="page-scroll" href="#portfolios">Images</a>
@@ -89,7 +88,6 @@
             <div class="contents text-center">
               <h1 class="wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="0.3s">Raspberry Bush</h1>
               <p class="lead  wow fadeIn" data-wow-duration="1000ms" data-wow-delay="400ms">Making a cluster of Raspberry Brambles to form a Raspberry Bush.</p>
-              <a href="#" class="btn btn-common wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">No Download</a>
             </div>
           </div>
         </div> 
@@ -173,7 +171,83 @@
         </div>
       </div>
     </section>
-    <!-- Features Section End -->    
+    <!-- Features Section End -->
+
+    <!-- Recipe Section Begin -->
+    <b>
+    <section id="recipe" class="section">
+      <!-- Container Starts -->
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Recipe</h2>
+          <hr class="lines">
+          <p class="section-subtitle" >Now that we have gathered our ingredients, we now need to prepare them.
+            This requires firstly assembling the ClusterHat, and then flashing the images to your micro SD cards.
+            The ClusterHat site itself has a pretty robust guide on this, so I will link to it
+            <a href="https://clusterhat.com/setup-overview">here</a>.
+            We recommend using etcher to flash the sd cards.</p>
+        </div>
+        <div class="row">
+          <b class="text">
+            Once assembled, flashed, and booted, follow these steps: <br>
+            <ol>
+              <li>To begin with, if you haven't already, turn on the clusterhat with the command, “clusterhat on”.</li>
+              <li>Turn ssh on by default, it will initially be off. There are two ways to do this, by using the gui, or the terminal.</li>
+              <li>Turn ssh on by default, it will initially be off. There are two ways to do this, by using the gui, or the terminal.</li>
+              <ol>
+                <li>The gui way.</li>
+                <li>The terminal way. Type in “sudo raspi-config”. Go into interfaces, then select ssh, and finally,
+                select yes. It will now be turned on by default.</li>
+              </ol>
+              <li>Once done on the main one, needs to be done to the rest of the pi zeros.
+              Do this, you need to firstly need to use the command “minicom” follow by the hostname of the pi zero,
+              for example, “minicom p1”. Once in, follow step 2b to setup ssh. Repeat for all pi zeros.</li>
+              <li>Once done, generate an rsa key, “ssh-keygen -t rsa”.</li>
+              <li>To get passwordless access into the pi’s,  run the following command, “for I in 1 2 3 4 sshit”.</li>
+              <li>If you are using v1.3 of pi zeros, you will run into the issue of having no wifi.</li>
+              <ol>
+                <li>a:Ssh into each of the pi zeros and add your wifi details wpa_supplicant.conf file.
+                This will make more sense in a bit when we are installing docker. Just “sudo nano /etc/wpa_supplicant/wpa_supplicants.conf” and add your network details i.e. network  =	{
+                        ssid="HOMEWIFI"
+                            psk="12345678"
+                        }</li>
+                <li>You may have to reboot, to do so, “sudo reboot”.</li>
+              </ol>
+              <li>Once all done, we can now move onto actually installing docker.
+                        Run the following command to download docker, “curl -sSL https://get.docker.com | sh”.</li>
+              <li>Once downloaded, run “sudo usermod -aG docker pi”. Now 'pi' user can run docker without needing sudo.</li>
+              <li>Run “docker version” to make sure everything installed correctly.</li>
+              <li>The same now needs to be done for all the pi zeros.
+                        However you cannot just ssh into them as they have no connection to the internet.
+                        If you have wifi enabled pi zeros you can skip this step and simply install using ssh.</li>
+                <ol>
+                  <li>Turn off your machine, remove the sd card from the main pi 3 b and put in the sd card from p1.</li>
+                  <li>Boot up the machine. You will not be able to do anything else now as it has no drivers for mouse or keyboard.</li>
+                  <li>Boot up the machine. You will not be able to do anything else now as it has no drivers for mouse or keyboard.</li>
+                  <li>You will need a seperate computer to ssh into, we used windows, and putty to do so.</li>
+                  <li>To ssh into the device, there are multiple ways, however, only one worked for us.
+                        On boot up, it displays the ip address on the screen. Use this to gain access. Once in, simply follow step 6.</li>
+                  <li>Do the same for the rest of the sd cards, the ip address should be same for them all.</li>
+                </ol>
+              <li>Once docker is installed on all pi’s, run “docker info|grep Swarm”. You should see that the swarm is inactive.</li>
+              <li>To start a swarm, run the following command on the main controller “docker swarm init”, or “docker swarm init --advertise-addr <ip>”.</li>
+              <li>A token should be generated, “docker swarm join \  --token &lt;random token docker generated&gt; \ &lt;controller ip&gt;:”.
+                          This needs to be pasted into each of the pi zeros, however there is a slight problem.
+                          The devices have no real time clocks, and are years behind,
+                          if you run this command it will simply state that the certificate is invalid.
+                          To fix this you will need to:</li>
+              <ol>
+               <li>Change the time to the current using the command “sudo date -s "11 MAR 2018 11:11:11".</li>
+              <li>To the same for all the pi zeros. It doesn't matter if there a couple minutes off.</li>
+              </ol>
+               <li>Once the times have been set, paste the token in each of the other pi zeros to add them to the swarm.</li>
+              <li>To check that all have joined, run “docker node ls”.</li>
+            </ol>
+            You have successfully got a docker swarm running on your clusterhat, well done!
+          </div>
+      </section>
+    </b>
+    <!-- Portfolio Section Ends -->
 
     <!-- Portfolio Section -->
     <section id="portfolios" class="section">
