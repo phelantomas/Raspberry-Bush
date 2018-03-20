@@ -193,7 +193,6 @@
             <ol>
               <li>To begin with, if you haven't already, turn on the clusterhat with the command, “clusterhat on”.</li>
               <li>Turn ssh on by default, it will initially be off. There are two ways to do this, by using the gui, or the terminal.</li>
-              <li>Turn ssh on by default, it will initially be off. There are two ways to do this, by using the gui, or the terminal.</li>
               <ol>
                 <li>The gui way.</li>
                 <li>The terminal way. Type in “sudo raspi-config”. Go into interfaces, then select ssh, and finally,
@@ -207,9 +206,9 @@
               <li>If you are using v1.3 of pi zeros, you will run into the issue of having no wifi.</li>
               <ol>
                 <li>a:Ssh into each of the pi zeros and add your wifi details wpa_supplicant.conf file.
-                This will make more sense in a bit when we are installing docker. Just “sudo nano /etc/wpa_supplicant/wpa_supplicants.conf” and add your network details i.e. network  =	{
-                        ssid="HOMEWIFI"
-                            psk="12345678"
+                This will make more sense in a bit when we are installing docker. Just “sudo nano /etc/wpa_supplicant/wpa_supplicants.conf” and add your network details i.e. <br> network  =	{ <br>
+                        ssid="HOMEWIFI" <br>
+                            psk="12345678" <br>
                         }</li>
                 <li>You may have to reboot, to do so, “sudo reboot”.</li>
               </ol>
@@ -230,8 +229,9 @@
                   <li>Do the same for the rest of the sd cards, the ip address should be same for them all.</li>
                 </ol>
               <li>Once docker is installed on all pi’s, run “docker info|grep Swarm”. You should see that the swarm is inactive.</li>
-              <li>To start a swarm, run the following command on the main controller “docker swarm init”, or “docker swarm init --advertise-addr <ip>”.</li>
-              <li>A token should be generated, “docker swarm join \  --token &lt;random token docker generated&gt; \ &lt;controller ip&gt;:”.
+              <li>To start a swarm, run the following command on the main controller “docker swarm init”, or “docker swarm init --advertise-addr &lt;ip&gt;”.</li>
+              <li>A token should be generated, “docker swarm join \ <br> --token &lt;random token docker generated&gt; \
+                <br> &lt;controller ip&gt;:”. <br>
                           This needs to be pasted into each of the pi zeros, however there is a slight problem.
                           The devices have no real time clocks, and are years behind,
                           if you run this command it will simply state that the certificate is invalid.
