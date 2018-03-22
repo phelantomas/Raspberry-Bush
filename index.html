@@ -176,8 +176,7 @@
     <!-- Features Section End -->
 
     <!-- Recipe Section Begin -->
-    <b>
-    <section id="recipe" class="section">
+    <section id="recipe" class="features">
       <!-- Container Starts -->
       <div class="container">
         <div class="section-header">
@@ -185,12 +184,12 @@
           <hr class="lines">
           <p class="section-subtitle" >Now that we have gathered our ingredients, we now need to prepare them.
             This requires firstly assembling the ClusterHat, and then flashing the images to your micro SD cards.
-            The ClusterHat site itself has a pretty robust guide on this, so I will link to it
+            The ClusterHat site itself has a pretty robust guide on this, so we will link to it
             <a href="https://clusterhat.com/setup-overview">here</a>.
-            We recommend using etcher to flash the sd cards.</p>
+            We recommend using etcher to flash the sd cards.
+			</p>
         </div>
         <div class="row">
-          <b class="text">
             Once assembled, flashed, and booted, follow these steps: <br>
             <ol>
               <li>To begin with, if you haven't already, turn on the clusterhat with the command, “clusterhat on”.</li>
@@ -207,7 +206,7 @@
               <li>To get passwordless access into the pi’s,  run the following command, “for I in 1 2 3 4 sshit”.</li>
               <li>If you are using v1.3 of pi zeros, you will run into the issue of having no wifi.</li>
               <ol>
-                <li>a:Ssh into each of the pi zeros and add your wifi details wpa_supplicant.conf file.
+                <li>ssh into each of the pi zeros and add your wifi details wpa_supplicant.conf file.
                 This will make more sense in a bit when we are installing docker. Just “sudo nano /etc/wpa_supplicant/wpa_supplicants.conf” and add your network details i.e. <br> network  =	{ <br>
                         ssid="HOMEWIFI" <br>
                             psk="12345678" <br>
@@ -245,10 +244,9 @@
                <li>Once the times have been set, paste the token in each of the other pi zeros to add them to the swarm.</li>
               <li>To check that all have joined, run “docker node ls”.</li>
             </ol>
-            You have successfully got a docker swarm running on your clusterhat, well done!
+            You have successfully got a docker swarm running on your clusterhat, well done!<br><br>
           </div>
       </section>
-    </b>
     <!-- Portfolio Section Ends -->
 
     <!-- Portfolio Section -->
@@ -355,7 +353,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-8">
               <div class="video-promo-content text-center">
-                <h2 class="wow zoomIn" data-wow-duration="1000ms" data-wow-delay="100ms">Watch Our Intro video</h2>
+                <h2 class="wow zoomIn" data-wow-duration="1000ms" data-wow-delay="100ms">Watch Our video</h2>
                 <p class="wow zoomIn" data-wow-duration="1000ms" data-wow-delay="100ms">Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum congue posuere lacus, id tincidunt nisi porta sit amet. Suspendisse et sapien varius, pellentesque dui non, semper orci.</p>
                 <a href="https://www.youtube.com/watch?v=IXoMDwh4Cq8" class="video-popup wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="0.3s"><i class="lnr lnr-film-play"></i></a>
               </div>
@@ -407,7 +405,7 @@
           </div>
           <div class="col-lg-3 col-md-6 col-xs-12">
             <div class="single-team">
-              <img src="img/team/team3.jpg" alt="">
+              <img src="img/team/dmitrijs.jpg" alt="">
               <div class="team-details">
                 <div class="team-inner">                  
                   <h4 class="team-title">Dmitrijs Lobanovskis</h4>
@@ -422,7 +420,7 @@
           </div>
           <div class="col-lg-3 col-md-6 col-xs-12">
             <div class="single-team">
-              <img class="img-fulid" src="img/team/team4.jpg" alt="">
+              <img class="img-fulid" src="img/team/jerry.jpg" alt="">
               <div class="team-details">
                 <div class="team-inner">
                   <h4 class="team-title">Mingjie Shao</h4>
